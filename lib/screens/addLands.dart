@@ -40,44 +40,81 @@ class FormWidget extends StatefulWidget {
 
 class _FormWidgetState extends State<FormWidget> {
   final _formKey = GlobalKey<FormState>();
+  var _txtControllerName = TextEditingController();
+  var _txtControllerLocation = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Name of the Property',
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            TextFormField(
+              controller: _txtControllerName,
+              decoration: const InputDecoration(
+                hintText: 'Name of the Property',
+              ),
+              validator: (value1) {
+                if (value1.isEmpty) {
+                  return 'Please add the property name';
+                }
+                return null;
+              },
             ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please add a Name';
-              }
-              return null;
-            },
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 16.0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Row(
+              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                RaisedButton(
-                  onPressed: () {
-                    if(_formKey.currentState.validate()){
-                      print('Saved');
-                    }
-                  },
-                  child: Text('Add'),
+                Expanded(
+                  child: TextFormField(
+                    controller: _txtControllerLocation,
+                    decoration: const InputDecoration(
+                      hintText: 'Location: Lat, Long',
+                    ),
+                    validator: (value2) {
+                      if (value2.isEmpty) {
+                        return 'Please add the property location';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
+                IconButton(
+                  icon: Icon(Icons.add_location),
+                  padding: EdgeInsets.all(5.0),
+                  onPressed: () {
+                    _txtControllerLocation.text = '1.2314,3.4234';
+                    setState(() {
+                      
+                    });
+                  },
+                )
               ],
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 16.0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    color: AppBarStyle.appBarColor,
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        print('Saved Name = ${_txtControllerName.text}');
+                      }
+                    },
+                    child: Text('Add'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
