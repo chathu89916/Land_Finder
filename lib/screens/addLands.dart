@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:Land_Finder/screens/lands.dart';
 import 'package:Land_Finder/style/appBarStyle.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddLands extends StatefulWidget {
   @override
@@ -42,7 +43,8 @@ class _FormWidgetState extends State<FormWidget> {
   final _formKey = GlobalKey<FormState>();
   var _txtControllerName = TextEditingController();
   var _txtControllerLocation = TextEditingController();
-
+  var _txtControllerValue = TextEditingController();
+  final firestoreInstance = Firestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,18 @@ class _FormWidgetState extends State<FormWidget> {
               validator: (value1) {
                 if (value1.isEmpty) {
                   return 'Please add the property name';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: _txtControllerValue,
+              decoration: const InputDecoration(
+                hintText: 'Per Perch Value',
+              ),
+              validator: (value1) {
+                if (value1.isEmpty) {
+                  return 'Add the value';
                 }
                 return null;
               },
@@ -87,9 +101,7 @@ class _FormWidgetState extends State<FormWidget> {
                   padding: EdgeInsets.all(5.0),
                   onPressed: () {
                     _txtControllerLocation.text = '1.2314,3.4234';
-                    setState(() {
-                      
-                    });
+                    setState(() {});
                   },
                 )
               ],
@@ -105,6 +117,11 @@ class _FormWidgetState extends State<FormWidget> {
                     color: AppBarStyle.appBarColor,
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
+                        firestoreInstance.collection("lands").add({
+                          "name": _txtControllerName.text,
+                          "value": _txtControllerValue.text,
+                          "location": _txtControllerLocation.text,
+                        }).then((value) => {print(value.documentID)});
                         print('Saved Name = ${_txtControllerName.text}');
                       }
                     },

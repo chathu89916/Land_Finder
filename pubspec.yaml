@@ -34,6 +34,8 @@ dev_dependencies:
     sdk: flutter
   adobe_xd:
   flutter_launcher_icons:
+  cloud_firestore: ^0.13.4+2
+  firebase_auth: ^0.16.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

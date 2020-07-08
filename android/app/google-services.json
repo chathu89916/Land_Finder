@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "985148103983",
+    "firebase_url": "https://land-finder-b52c3.firebaseio.com",
+    "project_id": "land-finder-b52c3",
+    "storage_bucket": "land-finder-b52c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985148103983:android:09ef17e1668d9c5c7115da",
+        "android_client_info": {
+          "package_name": "com.example.Land_Finder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985148103983-i5jjao10fg5h4hd39sadu4ibkef1c91j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeZChYYSgNViojoiAE88KNhsOHflR1FBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985148103983-i5jjao10fg5h4hd39sadu4ibkef1c91j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
