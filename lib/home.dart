@@ -3,17 +3,16 @@ import 'package:Land_Finder/screens/lands.dart';
 import 'package:Land_Finder/screens/addLands.dart';
 
 class Home extends StatelessWidget {
-  Home(){
-  }
+  Home() {}
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Land Finder",
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/home',
       routes: {
-        '/': (context) => Lands(),
-        '/addLands':(context)=> AddLands(),
+        '/home': (context) => new Lands(),
+        '/addLands': (context) => new AddLands(),
       },
     );
   }

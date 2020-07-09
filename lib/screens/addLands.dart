@@ -11,23 +11,20 @@ class AddLands extends StatefulWidget {
 class _AddLandsState extends State<AddLands> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.blueGrey[100],
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          backgroundColor: AppBarStyle.appBarColor,
-          title: Text(
-            'Add a Land',
-            style: AppBarStyle.txtStyle,
-          ),
+    return Scaffold(
+      backgroundColor: Colors.blueGrey[100],
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        body: FormWidget(),
+        backgroundColor: AppBarStyle.appBarColor,
+        title: Text(
+          'Add a Land',
+          style: AppBarStyle.txtStyle,
+        ),
       ),
+      body: FormWidget(),
     );
   }
 }
@@ -117,12 +114,7 @@ class _FormWidgetState extends State<FormWidget> {
                     color: AppBarStyle.appBarColor,
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
-                        firestoreInstance.collection("lands").add({
-                          "name": _txtControllerName.text,
-                          "value": _txtControllerValue.text,
-                          "location": _txtControllerLocation.text,
-                        }).then((value) => {print(value.documentID)});
-                        print('Saved Name = ${_txtControllerName.text}');
+                        addData();
                       }
                     },
                     child: Text('Add'),
@@ -134,5 +126,14 @@ class _FormWidgetState extends State<FormWidget> {
         ),
       ),
     );
+  }
+
+  void addData() async {
+    await firestoreInstance.collection("lands").add({
+      'name': _txtControllerName.text,
+      'value': _txtControllerValue.text,
+      'location': _txtControllerLocation.text,
+    });
+    Navigator.of(context).pop();
   }
 }
