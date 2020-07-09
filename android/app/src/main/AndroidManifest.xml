@@ -9,6 +9,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="Land_Finder"
         android:icon="@mipmap/ic_launcher">
+            <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyCvJiMVrNG4XaoZD4bPz8sfq3y5jGZtBzQ"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

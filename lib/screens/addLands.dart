@@ -97,7 +97,7 @@ class _FormWidgetState extends State<FormWidget> {
                   icon: Icon(Icons.add_location),
                   padding: EdgeInsets.all(5.0),
                   onPressed: () {
-                    _txtControllerLocation.text = '1.2314,3.4234';
+                    Navigator.pushNamed(context, '/map');
                     setState(() {});
                   },
                 )
