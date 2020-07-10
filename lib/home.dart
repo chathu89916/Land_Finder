@@ -4,7 +4,7 @@ import 'package:Land_Finder/screens/addLands.dart';
 import 'package:Land_Finder/screens/map.dart';
 
 class Home extends StatelessWidget {
-  Home() {}
+  Home();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

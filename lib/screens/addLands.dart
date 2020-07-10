@@ -1,7 +1,11 @@
+import 'package:Land_Finder/screens/map.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:Land_Finder/screens/lands.dart';
+//import 'package:Land_Finder/screens/lands.dart';
 import 'package:Land_Finder/style/appBarStyle.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:geolocator/geolocator.dart';
 
 class AddLands extends StatefulWidget {
   @override
@@ -42,6 +46,27 @@ class _FormWidgetState extends State<FormWidget> {
   var _txtControllerLocation = TextEditingController();
   var _txtControllerValue = TextEditingController();
   final firestoreInstance = Firestore.instance;
+  LatLng _information;
+
+  void updateInformation(LatLng information) {
+    setState(() {
+      _information = information;
+      String latitude = _information.latitude.toString();
+      String longitude = _information.longitude.toString();
+      _txtControllerLocation.text = '$latitude,$longitude';
+    });
+  }
+
+  void goToMap() async {
+    _information = await Navigator.push(
+      context,
+      CupertinoPageRoute(
+        fullscreenDialog: true,
+        builder: (context) => MapShow(),
+      ),
+    );
+    updateInformation(_information);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +122,9 @@ class _FormWidgetState extends State<FormWidget> {
                   icon: Icon(Icons.add_location),
                   padding: EdgeInsets.all(5.0),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/map');
-                    setState(() {});
+                    goToMap();
+                    // Navigator.pushNamed(context, '/map');
+                    // setState(() {});
                   },
                 )
               ],

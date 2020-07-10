@@ -61,29 +61,15 @@ class _LandsState extends State<Lands> with SingleTickerProviderStateMixin {
   Widget _newCard(BuildContext context, int index, AsyncSnapshot snapshot) {
     return Card(
       color: Colors.blueGrey[200],
-      margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          children: <Widget>[
-            SizedBox(
-              width: 5.0,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  snapshot.data[index].data["name"],
-                  style: txtThemeHeading,
-                ),
-                Text(
-                  'Price: ${snapshot.data[index].data["value"]}',
-                  style: txtThemeSub,
-                ),
-              ],
-            ),
-          ],
+      margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 6.0),
+      child: ListTile(
+        title: Text(
+          snapshot.data[index].data["name"],
+          style: txtThemeHeading,
+        ),
+        subtitle: Text(
+          'Price: ${snapshot.data[index].data["value"]}',
+          style: txtThemeSub,
         ),
       ),
     );
@@ -94,6 +80,12 @@ class _LandsState extends State<Lands> with SingleTickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Colors.blueGrey[100],
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.map),
+            onPressed: () {},
+          ),
+        ],
         backgroundColor: AppBarStyle.appBarColor,
         title: Text(
           'Your Home',
