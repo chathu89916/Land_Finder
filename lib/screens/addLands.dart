@@ -111,8 +111,8 @@ class _FormWidgetState extends State<FormWidget> {
                       hintText: 'Location: Lat, Long',
                     ),
                     validator: (value2) {
-                      if (value2.isEmpty) {
-                        return 'Please add the property location';
+                      if ((value2.isEmpty) && (value2.contains(',') == false)) {
+                        return 'Please add the property location correctly';
                       }
                       return null;
                     },
@@ -155,10 +155,13 @@ class _FormWidgetState extends State<FormWidget> {
   }
 
   void addData() async {
+    var latLng = _txtControllerLocation.text.split(",");
+    LatLng location =
+        new LatLng(double.parse(latLng[0]), double.parse(latLng[1]));
     await firestoreInstance.collection("lands").add({
       'name': _txtControllerName.text,
       'value': _txtControllerValue.text,
-      'location': _txtControllerLocation.text,
+      'location': new GeoPoint(location.latitude, location.longitude),
     });
     Navigator.of(context).pop();
   }
