@@ -83,7 +83,9 @@ class _LandsState extends State<Lands> with SingleTickerProviderStateMixin {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.map),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/mapAll');
+            },
           ),
         ],
         backgroundColor: AppBarStyle.appBarColor,
