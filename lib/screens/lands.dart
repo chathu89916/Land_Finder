@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:Land_Finder/style/appBarStyle.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:Land_Finder/style/floatingButtonStyle.dart';
 
 class Lands extends StatefulWidget {
   @override
   _LandsState createState() => _LandsState();
 }
 
-final TextStyle txtThemeHeading =
-    TextStyle(color: Colors.white, fontFamily: 'Roboto', fontSize: 20.0);
-final TextStyle txtThemeSub =
-    TextStyle(color: Colors.white, fontFamily: 'Roboto', fontSize: 15.0);
+// final TextStyle txtThemeHeading =
+//     TextStyle(color: Color(0xff212121), fontSize: 20.0);
+// final TextStyle txtThemeSub =
+//     TextStyle(color: Color(0xff757575), fontSize: 15.0);
 
 class _LandsState extends State<Lands> with SingleTickerProviderStateMixin {
   TabController _tabController;
@@ -37,13 +38,19 @@ class _LandsState extends State<Lands> with SingleTickerProviderStateMixin {
     Tab(
       child: Text(
         'Lands',
-        style: txtThemeSub,
+        // style: TextStyle(
+        //   color: Color(0xffFFFFFF),
+        //   fontSize: 20.0,
+        // ),
       ),
     ),
     Tab(
       child: Text(
         'Houses',
-        style: txtThemeSub,
+        // style: TextStyle(
+        //   color: Color(0xffFFFFFF),
+        //   fontSize: 20.0,
+        // ),
       ),
     ),
   ];
@@ -60,16 +67,16 @@ class _LandsState extends State<Lands> with SingleTickerProviderStateMixin {
 
   Widget _newCard(BuildContext context, int index, AsyncSnapshot snapshot) {
     return Card(
-      color: Colors.blueGrey[200],
+      color: Color(0xffCFD8DC),
       margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 6.0),
       child: ListTile(
         title: Text(
           snapshot.data[index].data["name"],
-          style: txtThemeHeading,
+          style: TextStyle(color: Color(0xff212121), fontSize: 20.0),
         ),
         subtitle: Text(
           'Price: ${snapshot.data[index].data["value"]}',
-          style: txtThemeSub,
+          style: TextStyle(color: Color(0xff757575), fontSize: 15.0),
         ),
       ),
     );
@@ -78,7 +85,7 @@ class _LandsState extends State<Lands> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
@@ -94,8 +101,16 @@ class _LandsState extends State<Lands> with SingleTickerProviderStateMixin {
           style: AppBarStyle.txtStyle,
         ),
         bottom: TabBar(
+          indicatorWeight: 3.5,
+          indicatorColor: ButtonStyle.actionButtonColor,
+          unselectedLabelColor: Color(0xffBDBDBD),
+          labelStyle: TextStyle(
+            color: Color(0xffFFFFFF),
+            fontSize: 20.0,
+            //fontWeight: FontWeight.bold,
+          ),
           controller: _tabController,
-          indicatorColor: Colors.blueGrey[100],
+          //indicatorColor: Colors.blueGrey[100],
           tabs: mainTabs,
         ),
       ),
@@ -154,10 +169,13 @@ class _LandsState extends State<Lands> with SingleTickerProviderStateMixin {
             onPressed: () {
               _tabController.index == 0
                   ? Navigator.pushNamed(context, '/addLands')
-                  : print('this is tab 2');
+                  : Navigator.pushNamed(context, '/addHouses');
             },
-            child: Icon(Icons.add),
-            backgroundColor: Colors.blueGrey[300],
+            child: Icon(
+              Icons.add,
+              color: ButtonStyle.lableColor,
+            ),
+            backgroundColor: ButtonStyle.actionButtonColor,
           ),
         ],
       ),

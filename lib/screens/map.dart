@@ -4,6 +4,7 @@ import 'package:Land_Finder/style/appBarStyle.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:Land_Finder/style/floatingButtonStyle.dart';
 
 class MapShow extends StatefulWidget {
   @override
@@ -79,7 +80,7 @@ class _MapShowState extends State<MapShow> {
           Navigator.pop(context, getLocation);
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.blueGrey[300],
+        backgroundColor: ButtonStyle.actionButtonColor,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

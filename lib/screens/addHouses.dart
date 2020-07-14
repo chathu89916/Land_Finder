@@ -8,12 +8,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 //import 'package:geolocator/geolocator.dart';
 
-class AddLands extends StatefulWidget {
+class AddHouses extends StatefulWidget {
   @override
-  _AddLandsState createState() => _AddLandsState();
+  _AddHousesState createState() => _AddHousesState();
 }
 
-class _AddLandsState extends State<AddLands> {
+class _AddHousesState extends State<AddHouses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _AddLandsState extends State<AddLands> {
         ),
         backgroundColor: AppBarStyle.appBarColor,
         title: Text(
-          'Add a Land',
+          'Add a House',
           style: AppBarStyle.txtStyle,
         ),
       ),
@@ -45,6 +45,8 @@ class _FormWidgetState extends State<FormWidget> {
   final _formKey = GlobalKey<FormState>();
   var _txtControllerName = TextEditingController();
   var _txtControllerLocation = TextEditingController();
+  var _txtControllerBeds = TextEditingController();
+  var _txtControllerBaths = TextEditingController();
   var _txtControllerValue = TextEditingController();
   final firestoreInstance = Firestore.instance;
   LatLng _information;
@@ -90,6 +92,18 @@ class _FormWidgetState extends State<FormWidget> {
                   }
                   return null;
                 },
+              ),
+              TextFormField(
+                controller: _txtControllerBeds,
+                decoration: const InputDecoration(
+                  hintText: 'Number of Bedrooms',
+                ),
+              ),
+              TextFormField(
+                controller: _txtControllerBaths,
+                decoration: const InputDecoration(
+                  hintText: 'Number of Bathrooms',
+                ),
               ),
               TextFormField(
                 controller: _txtControllerValue,
@@ -162,9 +176,11 @@ class _FormWidgetState extends State<FormWidget> {
     var latLng = _txtControllerLocation.text.split(",");
     LatLng location =
         new LatLng(double.parse(latLng[0]), double.parse(latLng[1]));
-    await firestoreInstance.collection("lands").add({
+    await firestoreInstance.collection("houses").add({
       'name': _txtControllerName.text,
       'value': _txtControllerValue.text,
+      'beds': _txtControllerBeds.text,
+      'baths': _txtControllerBaths.text,
       'location': new GeoPoint(location.latitude, location.longitude),
     });
     Navigator.of(context).pop();
